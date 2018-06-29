@@ -106,7 +106,7 @@ type SecurityContextConstraints struct {
 	// e.g. "foo/*" allows "foo/bar", "foo/baz", etc.
 	// e.g. "foo.*" allows "foo.bar", "foo.baz", etc.
 	// +optional
-	AllowedUnsafeSysctls []string `json:"allowedUnsafeSysctls,omitempty"`
+	AllowedUnsafeSysctls []string `json:"allowedUnsafeSysctls,omitempty" protobuf:"bytes,22,rep,name=allowedUnsafeSysctls"`
 	// ForbiddenSysctls is a list of explicitly forbidden sysctls, defaults to none.
 	// Each entry is either a plain sysctl name or ends in "*" in which case it is considered
 	// as a prefix of forbidden sysctls. Single * means all sysctls are forbidden.
@@ -115,7 +115,7 @@ type SecurityContextConstraints struct {
 	// e.g. "foo/*" forbids "foo/bar", "foo/baz", etc.
 	// e.g. "foo.*" forbids "foo.bar", "foo.baz", etc.
 	// +optional
-	ForbiddenSysctls []string `json:"forbiddenSysctls,omitempty"`
+	ForbiddenSysctls []string `json:"forbiddenSysctls,omitempty" protobuf:"bytes,23,rep,name=forbiddenSysctls"`
 }
 
 // FS Type gives strong typing to different file systems that are used by volumes.
