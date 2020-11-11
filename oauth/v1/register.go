@@ -41,6 +41,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&OAuthRedirectReference{},
 		&UserOAuthAccessToken{},
 		&UserOAuthAccessTokenList{},
+		&OAuthTokenReview{},
 	)
 	metav1.AddToGroupVersion(scheme, GroupVersion)
 	return nil

@@ -1,6 +1,7 @@
 package v1
 
 import (
+	kauthenticationv1 "k8s.io/api/authentication/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -269,3 +270,7 @@ type UserOAuthAccessTokenList struct {
 
 	Items []UserOAuthAccessToken `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type OAuthTokenReview kauthenticationv1.TokenReview

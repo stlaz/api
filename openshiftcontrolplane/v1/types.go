@@ -28,8 +28,7 @@ type OpenShiftAPIServerConfig struct {
 	// routingConfig holds information about routing and route generation
 	RoutingConfig RoutingConfig `json:"routingConfig"`
 
-	// serviceAccountOAuthGrantMethod is used for determining client authorization for service account oauth client.
-	// It must be either: deny, prompt, or ""
+	// DEPRECATED: setting this has no effect
 	ServiceAccountOAuthGrantMethod GrantHandlerType `json:"serviceAccountOAuthGrantMethod"`
 
 	// jenkinsPipelineConfig holds information about the default Jenkins template

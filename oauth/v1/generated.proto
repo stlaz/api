@@ -11,6 +11,66 @@ import "k8s.io/apimachinery/pkg/runtime/schema/generated.proto";
 // Package-wide variables from generator "generated".
 option go_package = "v1";
 
+message TokenReviewSpec {
+  // Token is the opaque bearer token.
+  // +optional
+  optional string token = 1;
+
+  // Audiences is a list of the identifiers that the resource server presented
+  // with the token identifies as. Audience-aware token authenticators will
+  // verify that the token was intended for at least one of the audiences in
+  // this list. If no audiences are provided, the audience will default to the
+  // audience of the Kubernetes apiserver.
+  // +optional
+  repeated string audiences = 2;
+}
+
+message TokenReviewStatus {
+  // Authenticated indicates that the token was associated with a known user.
+  // +optional
+  optional bool authenticated = 1;
+
+  // User is the UserInfo associated with the provided token.
+  // +optional
+  optional UserInfo user = 2;
+
+  // Audiences are audience identifiers chosen by the authenticator that are
+  // compatible with both the TokenReview and token. An identifier is any
+  // identifier in the intersection of the TokenReviewSpec audiences and the
+  // token's audiences. A client of the TokenReview API that sets the
+  // spec.audiences field should validate that a compatible audience identifier
+  // is returned in the status.audiences field to ensure that the TokenReview
+  // server is audience aware. If a TokenReview returns an empty
+  // status.audience field where status.authenticated is "true", the token is
+  // valid against the audience of the Kubernetes API server.
+  // +optional
+  repeated string audiences = 4;
+
+  // Error indicates that the token couldn't be checked
+  // +optional
+  optional string error = 3;
+}
+
+message UserInfo {
+  // The name that uniquely identifies this user among all active users.
+  // +optional
+  optional string username = 1;
+
+  // A unique value that identifies this user across time. If this user is
+  // deleted and another user by the same name is added, they will have
+  // different UIDs.
+  // +optional
+  optional string uid = 2;
+
+  // The names of groups this user is a part of.
+  // +optional
+  repeated string groups = 3;
+
+  // Any additional information provided by the authenticator.
+  // +optional
+  map<string, string> extra = 4;
+}
+
 // ClusterRoleScopeRestriction describes restrictions on cluster role scopes
 message ClusterRoleScopeRestriction {
   // RoleNames is the list of cluster roles that can referenced.  * means anything
@@ -193,6 +253,18 @@ message OAuthRedirectReference {
 
   // The reference to an redirect object in the current namespace.
   optional RedirectReference reference = 2;
+}
+
+message OAuthTokenReview {
+  // +optional
+  optional k8s.io.apimachinery.pkg.apis.meta.v1.ObjectMeta metadata = 1;
+
+  // Spec holds information about the request being evaluated
+  optional TokenReviewSpec spec = 2;
+
+  // Status is filled in by the server and indicates whether the request can be authenticated.
+  // +optional
+  optional TokenReviewStatus status = 3;
 }
 
 // RedirectReference specifies the target in the current namespace that resolves into redirect URIs.  Only the 'Route' kind is currently allowed.

@@ -147,7 +147,7 @@ var map_OpenShiftAPIServerConfig = map[string]string{
 	"imagePolicyConfig":              "imagePolicyConfig feeds the image policy admission plugin",
 	"projectConfig":                  "projectConfig feeds an admission plugin",
 	"routingConfig":                  "routingConfig holds information about routing and route generation",
-	"serviceAccountOAuthGrantMethod": "serviceAccountOAuthGrantMethod is used for determining client authorization for service account oauth client. It must be either: deny, prompt, or \"\"",
+	"serviceAccountOAuthGrantMethod": "DEPRECATED: setting this has no effect",
 	"jenkinsPipelineConfig":          "jenkinsPipelineConfig holds information about the default Jenkins template used for JenkinsPipeline build strategy.",
 	"cloudProviderFile":              "cloudProviderFile points to the cloud config file",
 }
