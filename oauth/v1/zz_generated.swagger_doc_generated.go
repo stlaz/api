@@ -129,6 +129,15 @@ func (OAuthRedirectReference) SwaggerDoc() map[string]string {
 	return map_OAuthRedirectReference
 }
 
+var map_OAuthTokenReview = map[string]string{
+	"spec":   "Spec holds information about the request being evaluated",
+	"status": "Status is filled in by the server and indicates whether the request can be authenticated.",
+}
+
+func (OAuthTokenReview) SwaggerDoc() map[string]string {
+	return map_OAuthTokenReview
+}
+
 var map_RedirectReference = map[string]string{
 	"":      "RedirectReference specifies the target in the current namespace that resolves into redirect URIs.  Only the 'Route' kind is currently allowed.",
 	"group": "The group of the target that is being referred to.",
@@ -148,6 +157,40 @@ var map_ScopeRestriction = map[string]string{
 
 func (ScopeRestriction) SwaggerDoc() map[string]string {
 	return map_ScopeRestriction
+}
+
+var map_TokenReviewSpec = map[string]string{
+	"":          "TokenReviewSpec is a description of the token authentication request.",
+	"token":     "Token is the opaque bearer token.",
+	"audiences": "Audiences is a list of the identifiers that the resource server presented with the token identifies as. Audience-aware token authenticators will verify that the token was intended for at least one of the audiences in this list. If no audiences are provided, the audience will default to the audience of the Kubernetes apiserver.",
+}
+
+func (TokenReviewSpec) SwaggerDoc() map[string]string {
+	return map_TokenReviewSpec
+}
+
+var map_TokenReviewStatus = map[string]string{
+	"":              "TokenReviewStatus is the result of the token authentication request.",
+	"authenticated": "Authenticated indicates that the token was associated with a known user.",
+	"user":          "User is the UserInfo associated with the provided token.",
+	"audiences":     "Audiences are audience identifiers chosen by the authenticator that are compatible with both the TokenReview and token. An identifier is any identifier in the intersection of the TokenReviewSpec audiences and the token's audiences. A client of the TokenReview API that sets the spec.audiences field should validate that a compatible audience identifier is returned in the status.audiences field to ensure that the TokenReview server is audience aware. If a TokenReview returns an empty status.audience field where status.authenticated is \"true\", the token is valid against the audience of the Kubernetes API server.",
+	"error":         "Error indicates that the token couldn't be checked",
+}
+
+func (TokenReviewStatus) SwaggerDoc() map[string]string {
+	return map_TokenReviewStatus
+}
+
+var map_UserInfo = map[string]string{
+	"":         "UserInfo holds the information about the user needed to implement the user.Info interface.",
+	"username": "The name that uniquely identifies this user among all active users.",
+	"uid":      "A unique value that identifies this user across time. If this user is deleted and another user by the same name is added, they will have different UIDs.",
+	"groups":   "The names of groups this user is a part of.",
+	"extra":    "Any additional information provided by the authenticator.",
+}
+
+func (UserInfo) SwaggerDoc() map[string]string {
+	return map_UserInfo
 }
 
 var map_UserOAuthAccessTokenList = map[string]string{
