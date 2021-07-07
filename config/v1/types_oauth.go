@@ -550,6 +550,11 @@ type OpenIDClaims struct {
 	// If unspecified, no email is set for the identity
 	// +optional
 	Email []string `json:"email,omitempty"`
+
+	// groups is the list of claims value of which should be used to synchronize groups
+	// from the OIDC provider to OpenShift for the user
+	// +optional
+	Groups []string `json:"groups,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
